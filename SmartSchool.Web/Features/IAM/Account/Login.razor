@@ -1,0 +1,23 @@
+﻿@using SmartSchool.Web.Components.Layout
+
+@page "/login"
+@layout AuthLayout
+@attribute [AllowAnonymous]
+
+<EditForm method="post" Model="LoginForm" OnValidSubmit="PerformLogin" FormName="login" style="margin-top:-10px">
+    <hr />
+
+    <div class="form-outline">
+        <label for="email" class="form-label">Email:</label>
+        <InputText @bind-Value="LoginForm.Email" required placeholder="user@example.com" class="form-control"/>
+    </div>
+
+    <div class="form-outline">
+        <label for="password" class="form-label">Password:</label>
+        <InputText type="password" @bind-Value="LoginForm.Password" required class="form-control" />
+    </div>
+
+    <div class="text-center pt-1 mb-5 pb-1">
+        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Login</button>
+    </div>
+</EditForm>
