@@ -1,8 +1,11 @@
 ﻿@using SmartSchool.Web.Components.Layout
+@using System.ComponentModel.DataAnnotations
 
 @page "/login"
 @layout AuthLayout
 @attribute [AllowAnonymous]
+
+@inject NavigationManager navigationManager
 
 <EditForm method="post" Model="LoginForm" OnValidSubmit="PerformLogin" FormName="login" style="margin-top:-10px">
     <hr />
@@ -21,3 +24,29 @@
         <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Login</button>
     </div>
 </EditForm>
+
+
+@code {
+    [SupplyParameterFromForm]
+    public LoginModel LoginForm { get; set; } = new();
+
+
+    public async Task PerformLogin(EditContext editContext)
+    {
+        navigationManager.NavigateTo("/");
+    }
+
+
+    public class LoginModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; } = string.Empty;
+    }
+}
