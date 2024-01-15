@@ -17,6 +17,11 @@ builder.Services.AddDbContext<AppDbContext>(opt => opt.UseNpgsql(cs));
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+});
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
